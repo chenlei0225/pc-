@@ -8,6 +8,19 @@ img{display: block;}
 /*清除浮动*/
 .clearfix{*zoom: 1;}
 .clearfix:after{content: "";display: block;clear: both;}
+.commont-title{
+    color:#009ee0;
+    font-size:80px;
+    line-height:0.8;
+    font-weight:bold;
+    letter-spacing:-5px;
+}
+
+.common-text{
+    color:white;
+    line-height:1.5;
+    font-size:15px;
+}
 
 #wrap{
     height: 100%;
@@ -45,6 +58,9 @@ img{display: block;}
     cursor: pointer;
     color: #009EE0;
 }
+.nav li:nth-child(1){
+    width: 18px;
+}
 .nav li:hover .down{
     width: 100%;
 }
@@ -79,7 +95,6 @@ img{display: block;}
 }
 .content-list{
     height: 500%;
-    background: blue;
     position: absolute;
     top: 0px;
     left: 0px;
@@ -89,6 +104,22 @@ img{display: block;}
 .content-list>li{
     height: 20%;
     position: relative;
+    background-repeat: no-repeat;
+}
+.content-list>li:nth-child(1){
+    background-image: url("../img/bg1.jpg");
+}
+.content-list>li:nth-child(2){
+    background-image: url("../img/bg2.jpg");
+}
+.content-list>li:nth-child(3){
+    background-image: url("../img/bg3.jpg");
+}
+.content-list>li:nth-child(4){
+    background-image: url("../img/bg4.jpg");
+}
+.content-list>li:nth-child(5){
+    background-image: url("../img/bg5.jpg");
 }
 .content-list>li section{
     width: 1100px;
@@ -99,5 +130,142 @@ img{display: block;}
     right: 0px;
     bottom: 0px;
     margin: auto;
-    background: yellow;
+}
+
+.home-list{
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    perspective: 1000px;
+}
+.home-list li{
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    text-align: center;
+    line-height: 520px;
+    color: white;
+    visibility: hidden;
+}
+.home-list li.active{
+    visibility: visible;
+}
+.home-list li:nth-child(1){
+    background:#dc6c5f;
+}
+.home-list li:nth-child(2){
+    background:#95dc84;
+}
+.home-list li:nth-child(3){
+    background:#64b9d2;
+}
+.home-list li:nth-child(4){
+    background:#000000;
+}
+.circle-point{
+    position: absolute;
+    left: 50%;
+    bottom: 20px;
+    transform: translateX(-50%);
+}
+.circle-point li{
+    width: 20px;
+    height: 20px;
+    background-color: rgba(255,255,255,0.5);
+    margin: 2px;
+    box-shadow: 0 0 4px rgba(25,25,25,0.8);
+    float: left;
+    border-radius: 50%;
+}
+.circle-point .active{
+    background-color: white;
+}
+
+.home-list .right-hide{
+    animation: right-hide 1s linear;
+}
+.home-list .right-show{
+    visibility: visible;
+    animation: right-show 1s linear;
+}
+.home-list .left-hide{
+    animation: left-hide 1s linear;
+}
+.home-list .left-show{
+    visibility: visible;
+    animation: left-show 1s linear;
+}
+
+@keyframes right-hide {
+    0%{visibility: visible;}
+    50%{transform: translateX(200px) scale(.8) rotateY(-30deg)}
+    100%{visibility: hidden;transform: translateZ(-200px)}
+}
+@keyframes right-show {
+    0%{visibility: hidden;transform: translateZ(-200px)}
+    50%{transform: translateX(200px) scale(.8) rotateY(-30deg)}
+    100%{visibility: visible;}
+}
+@keyframes left-hide {
+    0%{visibility: visible;}
+    50%{transform: translateX(-200px) scale(.8) rotateY(30deg)}
+    100%{visibility: hidden;transform: translateZ(-200px)}
+}
+@keyframes left-show {
+    0%{visibility: hidden;transform: translateZ(-200px)}
+    50%{transform: translateX(-200px) scale(.8) rotateY(30deg)}
+    100%{visibility: visible;}
+}
+
+.course{
+    position: relative;
+}
+
+
+.course h2{
+    margin: 50px;
+}
+.course p{
+    width: 400px;
+    margin-left: 50px;
+}
+.course-list {
+    position: absolute;
+    top: 70px;
+    right: 50px;
+    width: 480px;
+}
+.course-list li{
+    float: left;
+    position: relative;
+    width: 120px;
+    height: 132px;
+    transform-style: preserve-3d;
+}
+.course-list li:hover .front{
+    transform: rotateY(180deg);
+}
+.course-list li:hover .back{
+    transform: rotateY(360deg);
+}
+.course-list li .front{
+    height: 100%;
+    background-image: url("../img/pcwelt.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    transition: transform 2s;
+}
+.course-list li .back{
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 15px;
+    height: 100%;
+    box-sizing: border-box;
+    backface-visibility: hidden;
+    transform: rotateY(180deg);
+    background: #009ee0;
+    transition: transform 2s;
 }
