@@ -219,6 +219,7 @@ img{display: block;}
     100%{visibility: visible;}
 }
 
+/*第二屏*/
 .course h2{
     margin: 50px;
 }
@@ -264,6 +265,35 @@ img{display: block;}
     background: #009ee0;
     transition: transform 2s;
 }
+.row-list{
+    position: absolute;
+    top: 70px;
+    right: 50px;
+}
+.row-list li{
+    position: absolute;
+    top: -5px;
+    width: 9px;
+    height: 676px;
+    background-image: url("../img/plus_row.png");
+    background-repeat: no-repeat;
+}
+.row-list li:nth-child(1){
+    left: -5px;
+}
+.row-list li:nth-child(2){
+    left: -125px;
+}
+.row-list li:nth-child(3){
+    left: -245px;
+}
+.row-list li:nth-child(4){
+    left: -365px;
+}
+.row-list li:nth-child(5){
+    left: -485px;
+}
+
 
 /*第三屏*/
 
