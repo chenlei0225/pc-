@@ -6,10 +6,20 @@ window.addEventListener('DOMContentLoaded', function () {
   var contentHeight = contentNode.offsetHeight;
   var contentListNode = document.querySelector('.content-list');
   var circleLiNodes = document.querySelectorAll('.circle-point li');
+  var homeNode = document.querySelector('.home');
   var homeListNode = document.querySelector('.home-list');
   var homeListLis = document.querySelectorAll('.home-list li');
   var circleNode = document.querySelector('.circle-list');
   var contentCircleLiNodes = document.querySelectorAll('.circle-list li');
+  var music = document.querySelector('.music');
+  var audio = document.querySelector('.audio');
+  var musicIcon = document.querySelector('.music img');
+  var planeNodes = document.querySelectorAll('.plane');
+  var pencilNodes = document.querySelectorAll('.pencil');
+  var aboutPhotoNodes=document.querySelectorAll('.about-photo');
+  var teamH2Node = document.querySelector('.team h2');
+  var teamP = document.querySelector('.team p');
+
   var nowIndex = 0;
   var lastIndex = 0;
 
@@ -32,6 +42,7 @@ window.addEventListener('DOMContentLoaded', function () {
     contentCircleLiNodes[i].onclick=function () {
       nowIndex=this.index;
       move(nowIndex);
+      lastIndex=nowIndex;
     }
   }
 
@@ -43,7 +54,9 @@ window.addEventListener('DOMContentLoaded', function () {
     contentCircleLiNodes[lastIndex].className = '';
     contentCircleLiNodes[nowIndex].className = 'active';
     contentListNode.style.top = -contentHeight * nowIndex + 'px';
-    lastIndex = nowIndex;
+    arr[nowIndex].anIn();
+    arr[lastIndex].anOut();
+    lastIndex=nowIndex;
   }
 
   contentHandle();
@@ -142,7 +155,10 @@ window.addEventListener('DOMContentLoaded', function () {
           homeListLis[lastIndex].className = 'commont-title left-hide';
           homeListLis[nowIndex].className = 'commont-title right-show';
         }
-        circleLiNodes[lastIndex].className = '';
+        for (var j = 0; j < circleLiNodes.length; j++) {
+          circleLiNodes[j].className = '';
+        }
+
         this.className = 'active';
         lastIndex = nowIndex;
         lastTime = nowTime;
@@ -274,5 +290,79 @@ window.addEventListener('DOMContentLoaded', function () {
 
   }
 
+  //音频
+  music.onclick=function () {
+    if(audio.paused){
+      audio.play();
+      musicIcon.src='img/musicon.gif';
+    }else {
+      audio.pause();
+      musicIcon.src='img/musicoff.gif';
+    }
+  }
+
+  //出入场动画
+
+    var arr = [
+      {
+       anOut:function () {
+         homeNode.style.transform='translateY(-200px)';
+         homeNode.style.opacity=0.5;
+       },
+       anIn:function () {
+         homeNode.style.transform='translateY(0px)';
+         homeNode.style.opacity=1;
+       }
+      },
+      {
+        anOut:function () {
+          planeNodes[0].style.transform='translate(-100px,-100px)';
+          planeNodes[1].style.transform='translate(-100px,100px)';
+          planeNodes[2].style.transform='translate(100px,-100px)';
+        },
+        anIn:function () {
+          planeNodes[0].style.transform='translate(0,0)';
+          planeNodes[1].style.transform='translate(0,0)';
+          planeNodes[2].style.transform='translate(0,0)';
+        }
+      },
+      {
+        anOut:function () {
+          pencilNodes[0].style.transform='translateY(-100px)';
+          pencilNodes[1].style.transform='translateY(100px)';
+          pencilNodes[2].style.transform='translateY(100px)';
+        },
+        anIn:function () {
+          pencilNodes[0].style.transform='translateY(0px)';
+          pencilNodes[1].style.transform='translateY(0px)';
+          pencilNodes[2].style.transform='translateY(0px)';
+        }
+      },
+      {
+        anOut:function () {
+          aboutPhotoNodes[0].style.transform='rotate(30deg)';
+          aboutPhotoNodes[1].style.transform='rotate(-30deg)';
+        },
+        anIn:function () {
+          aboutPhotoNodes[0].style.transform='rotate(0deg)';
+          aboutPhotoNodes[1].style.transform='rotate(0deg)';
+        }
+      },
+      {
+        anOut:function () {
+          teamH2Node.style.transform='translateX(-100px)';
+          teamP.style.transform='translateX(100px)';
+        },
+        anIn:function () {
+          teamH2Node.style.transform='translateX(0px)';
+          teamP.style.transform='translateX(0px)';
+        }
+      }
+    ];
+
+    for (var i = 0; i < arr.length; i++) {
+      arr[i].anOut();
+    }
+    arr[0].anIn();
 
 });
