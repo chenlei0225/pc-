@@ -93,6 +93,26 @@ img{display: block;}
     bottom: 0;
     overflow: hidden;
 }
+.circle-list{
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+}
+.circle-list li{
+  width: 15px;
+  height: 15px;
+  border: 1px solid white;
+  margin-top: 10px;
+  border-radius: 50%;
+}
+.circle-list li:first-child{
+  margin-top: 0;
+}
+
+.circle-list li.active{
+  background: white;
+}
 .content-list{
     height: 500%;
     position: absolute;
