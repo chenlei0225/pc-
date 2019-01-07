@@ -87,7 +87,6 @@ window.addEventListener('DOMContentLoaded',function () {
                         }
                         break;
                 }
-                console.log(nowIndex)
             },200);
 
             //禁止默认行为
@@ -162,7 +161,108 @@ window.addEventListener('DOMContentLoaded',function () {
             auto();
         }
 
+    }
 
+
+    //第五屏
+    teamHandle();
+    function teamHandle() {
+        var teamList = document.querySelector('.team-list');
+        var teamLiNodes = document.querySelectorAll('.team-list li');
+        var width = teamLiNodes[0].offsetWidth;
+        var height = teamLiNodes[0].offsetHeight;
+        var canvas = null;
+        var createBubble = null;
+        var paintingBubble = null;
+
+        //创建小球构造函数
+        function Ball(context) {
+            this.c_r = Math.round(Math.random()*8+2);
+            this.x = Math.random()*width;
+            this.y = height+this.c_r;
+            this.red = parseInt(Math.random()*255);
+            this.green = parseInt(Math.random()*255);
+            this.blue = parseInt(Math.random()*255);
+            // this.globalAlpha = 1;
+            //定义小球的方法
+            this.paint = function () {
+                // context.globalAlpha=this.globalAlpha;
+                context.fillStyle= 'rgb('+this.red+','+this.green+','+this.blue+')';
+                context.beginPath();
+                context.arc(this.x,this.y,this.c_r,0,Math.PI*2,true);
+                context.fill();
+            }
+            //定义小球的动画方法
+            this.deg = 0;
+            this.rad = 0;
+            this.s = 5;
+            this.animate = function () {
+                this.deg+=5;
+                this.rad=this.deg*Math.PI/180;
+                this.x = this.x+Math.sin(this.rad)*this.s;
+                this.y = this.y-this.rad*this.s*0.3;
+                if(this.y<=-this.c_r){
+                  return;
+                }
+            }
+        }
+
+
+        function ballHandle(context) {
+            //定义数组，将小球全部放入
+            var balls = [];
+            setInterval(function () {
+                var ball = new Ball(context);
+                balls.push(ball);
+            },20);
+
+            //设置动画，小球移动
+            setInterval(function () {
+                context.clearRect(0,0,width,height);
+                //遍历数组中的小球
+                for (var i = 0; i < balls.length; i++) {
+                    balls[i].paint();
+                    balls[i].animate();
+                }
+            },1000/60);
+        }
+
+
+        for (var i = 0; i < teamLiNodes.length; i++) {
+            teamLiNodes[i].index=i;
+            teamLiNodes[i].onmouseenter=function () {
+
+                for (var j = 0; j < teamLiNodes.length; j++) {
+                    teamLiNodes[j].style.opacity=0.5;
+                }
+                if(!canvas){
+                  canvas = document.createElement('canvas');
+                  var context = canvas.getContext('2d');
+                  canvas.width = width;
+                  canvas.height = height;
+                  ballHandle(context);
+                  canvas.className = 'canvas';
+                  teamList.appendChild(canvas);
+                }
+                canvas.style.left = this.index*width+'px';
+                this.style.opacity = 1;
+
+            }
+
+        }
+
+      teamList.onmouseleave=function () {
+        for (var j = 0; j < teamLiNodes.length; j++) {
+          teamLiNodes[j].style.opacity=1;
+        }
+        canvas.remove();
+        canvas = null;
+        clearInterval(createBubble);
+        clearInterval(paintingBubble);
+      }
 
     }
+
+
+
 });
